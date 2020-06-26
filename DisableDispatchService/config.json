@@ -1,5 +1,6 @@
 {
   "Dispatch": true,
   "Traffic": false,
-  "Destinity": 0.1
+  "Destinity": 0.1,
+  "DisablePedsDrop": true
 }

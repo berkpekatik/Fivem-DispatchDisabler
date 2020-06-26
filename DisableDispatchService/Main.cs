@@ -27,6 +27,10 @@ namespace DisableDispatchService
                 {
                     Tick += Traffic_Tick;
                 }
+                if (config.DisablePedsDrop)
+                {
+                    Tick += PedsDrop;
+                }
             }
             catch
             {
@@ -36,6 +40,22 @@ namespace DisableDispatchService
                 Debug.WriteLine("#################################");
             }
 
+        }
+
+        private async Task PedsDrop()
+        {
+            int entity = 0;
+            var id = FindFirstPed(ref entity);
+            var finished = false;
+            do
+            {
+                if (!IsEntityDead(entity))
+                {
+                    SetPedDropsWeaponsWhenDead(entity, false);
+                }
+                finished = FindNextPed(id, ref entity);
+            } while (!finished);
+            EndFindPed(entity);
         }
 
         private async Task Traffic_Tick()
